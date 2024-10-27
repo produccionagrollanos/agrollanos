@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- saved from url=(0099)https://n-eqiyid2zspbasapxm2ii6juloxqukyossufbnmy-0lu-script.googleusercontent.com/userCodeAppPanel -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./jsapi"></script><script>window.parent.maeExportApis_();</script>
+
+  
+    <!--<base target="_top">--><base href="." target="_top">
+    <style>
+      body { 
+        font-family: Arial, sans-serif; 
+        text-align: center; 
+      }
+      h2 { 
+        font-size: 20px; 
+      }
+      label { 
+        font-size: 18px; 
+        margin-top: 15px; 
+        display: block; 
+      }
+      input { 
+        font-size: 16px; 
+        padding: 8px; 
+        width: 50%; 
+        margin-top: 10px;
+        text-align: center;
+      }
+      button { 
+        font-size: 16px; 
+        padding: 10px 20px; 
+        margin-top: 10px; 
+      }
+      #resultado {
+        margin-top: 20px; 
+        font-size: 16px; 
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      ul li {
+        font-size: 18px;
+        margin: 8px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Buscar por Cédula</h2>
+    <label for="id">Ingrese la Cédula:</label>
+    <input type="text" id="id" placeholder="Ej. 123">
+    <button onclick="buscarID()">Buscar</button>
+    
+    <div id="resultado"><h3 style="font-size: 20px;">Resultados:</h3><ul><li><strong>OPERARIO:</strong> ANA NINFA CAYUY</li><li><strong>Q VERDE:</strong> 608650</li><li><strong>Q MADURO:</strong> </li><li><strong>SUELDO:</strong> 608650</li></ul></div>
+
+    <script>
+      function buscarID() {
+        const id = document.getElementById("id").value;
+        google.script.run.withSuccessHandler(mostrarResultado).buscarPorId(id);
+      }
+
+      function mostrarResultado(data) {
+        const resultadoDiv = document.getElementById("resultado");
+        resultadoDiv.innerHTML = ""; 
+
+        if (data.error) {
+          resultadoDiv.innerHTML = `<p style="color: red; font-size: 18px;">${data.error}</p>`;
+        } else {
+          let html = "<h3 style='font-size: 20px;'>Resultados:</h3><ul>";
+          html += `<li><strong>OPERARIO:</strong> ${data.OPERARIO}</li>`;
+          html += `<li><strong>Q VERDE:</strong> ${data.QVERDE}</li>`;
+          html += `<li><strong>Q MADURO:</strong> ${data.QMADURO}</li>`;
+          html += `<li><strong>SUELDO:</strong> ${data.SUELDO}</li>`;
+          html += "</ul>";
+          resultadoDiv.innerHTML = html;
+        }
+      }
+    </script>
+  
+
+</body></html>
